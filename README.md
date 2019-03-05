@@ -1,0 +1,13 @@
+# QueHorasChega
+
+### How to install
+
+````bash
+$ yarn `or` npm install
+````
+then with your emulator open
+
+````bash
+$ react-native run-android `or` react-native run-ios
+````
+
