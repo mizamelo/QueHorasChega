@@ -3,7 +3,7 @@
 ### How to install
 
 ````bash
-$ yarn `or` npm install
+$ yarn `or` npm i
 ````
 then with your emulator open
 
