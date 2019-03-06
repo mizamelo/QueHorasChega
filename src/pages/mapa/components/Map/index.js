@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import MapView from "react-native-maps";
 
+import Directions from '../Directions';
+
 import { View } from "react-native";
 
 export default class Map extends Component {
@@ -10,6 +12,10 @@ export default class Map extends Component {
       longitude: -49.644183,
       latitudeDelta: 0.0143,
       longitudeDelta: 0.0134
+    },
+    destination: {
+      latitude: -27.210853,
+      longitude: -49.642183
     }
   };
 
@@ -35,7 +41,8 @@ export default class Map extends Component {
   }
 
   render() {
-    const { region } = this.state;
+    const { region, destination } = this.state;
+
     return (
       <View style={{ flex: 1 }}>
         <MapView
@@ -43,6 +50,13 @@ export default class Map extends Component {
           region={region}
           showsUserLocation={true}
           loadingEnabled={true}
+        />
+        <Directions
+          origin={region}
+          destination={destination}
+          onReady={() => {
+
+          }}
         />
       </View>
     );

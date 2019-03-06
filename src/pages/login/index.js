@@ -32,8 +32,8 @@ export default class Login extends Component {
     disabledBtn: false
   };
   componentDidMount() {
-    // AsyncStorage.getItem("@doLogin") !== "" &&
-    //   this.props.navigation.navigate("Mapa");
+    AsyncStorage.getItem("@doLogin") !== "" &&
+      this.props.navigation.navigate("Mapa");
   }
 
   constructor(props) {
