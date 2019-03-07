@@ -31,6 +31,11 @@ export default class Login extends Component {
     error: "",
     disabledBtn: false
   };
+
+  static navigationOptions = () => ({
+    header: null
+  });
+
   componentDidMount() {
     AsyncStorage.getItem("@doLogin") !== "" &&
       this.props.navigation.navigate("Mapa");
@@ -38,7 +43,6 @@ export default class Login extends Component {
 
   constructor(props) {
     super(props);
-    console.tron.log(AsyncStorage.getItem("@doLogin"));
     this.emailValid = debounce(this.validationEmail, 500);
   }
 
