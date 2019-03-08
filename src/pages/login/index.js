@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { AsyncStorage } from "react-native";
-import { debounce } from "lodash";
+import { TextInputMask } from "react-native-masked-text";
 
 import {
   View,
@@ -15,17 +15,17 @@ import {
 import Icon from "react-native-vector-icons/FontAwesome";
 
 import styles from "./styles";
-import logo from "./logo.png";
-import BackgroundExitvs from "./background.jpg";
+import logo from "../../assets/logo.png";
+import BackgroundExitvs from "../../assets/background.jpg";
 
 export default class Login extends Component {
   state = {
     showIcon: true,
     icon: "eye",
     passwordValue: "",
-    emailValue: "",
+    cpflValue: "",
     credentials: {
-      email: "admin@admin.com",
+      cpf: "097.491.454-10",
       password: "123456"
     },
     error: "",
@@ -41,26 +41,12 @@ export default class Login extends Component {
       this.props.navigation.navigate("Mapa");
   }
 
-  constructor(props) {
-    super(props);
-    this.emailValid = debounce(this.validationEmail, 500);
-  }
-
   secureText = () => {
     const { showIcon } = this.state;
 
     showIcon
       ? this.setState({ showIcon: false, icon: "eye-slash" })
       : this.setState({ showIcon: true, icon: "eye" });
-  };
-
-  validationEmail = text => {
-    const regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-
-    !regex.test(text)
-      ? this.setState({ error: "Informe um e-mail válido", disabledBtn: true })
-      : this.setState({ error: "", disabledBtn: false, emailValue: text });
-    console.tron.log(text, regex.test(text));
   };
 
   doLogin = async () => {
@@ -73,12 +59,12 @@ export default class Login extends Component {
       await AsyncStorage.setItem("@doLogin", "login-is-true");
       this.props.navigation.navigate("Mapa");
     } else {
-      this.setState({ error: "Usuário e/ou senha incorreta" });
+      this.setState({ error: "CPF e/ou senha incorreta" });
     }
   };
 
   render() {
-    const { showIcon, icon, error, disabledBtn, passwordValue } = this.state;
+    const { showIcon, icon, error, disabledBtn, cpfValue } = this.state;
     return (
       <View style={styles.container}>
         <StatusBar hidden />
@@ -90,14 +76,16 @@ export default class Login extends Component {
           <View style={styles.box}>
             <Image style={styles.logo} source={logo} />
             <Text style={styles.alertError}>{error}</Text>
-            <TextInput
+            <TextInputMask
+              type={"cpf"}
               style={styles.input}
               autoCorrect={false}
               autoCapitalize="none"
-              placeholder="Digite seu E-mail"
+              placeholder="Digite seu CPF"
               placeholderTextColor="#999"
               underlineColorAndroid="transparent"
-              onChangeText={this.emailValid}
+              onChangeText={cpfValue => this.setState({ cpfValue })}
+              value={cpfValue}
             />
             <View style={styles.passwordContainer}>
               <TextInput
