@@ -25,7 +25,7 @@ export default class Login extends Component {
     passwordValue: "",
     cpflValue: "",
     credentials: {
-      cpf: "097.491.454-10",
+      cpf: "111.111.111-111",
       password: "123456"
     },
     error: "",
@@ -35,11 +35,6 @@ export default class Login extends Component {
   static navigationOptions = () => ({
     header: null
   });
-
-  componentDidMount() {
-    AsyncStorage.getItem("@doLogin") !== "" &&
-      this.props.navigation.navigate("Mapa");
-  }
 
   secureText = () => {
     const { showIcon } = this.state;

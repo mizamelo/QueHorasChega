@@ -1,12 +1,14 @@
 import { createAppContainer, createStackNavigator } from "react-navigation";
 import { colors } from "./styles";
 
+import LoadingPage from "./pages/LoadingPage";
 import Login from "./pages/login";
 import Mapa from "./pages/mapa";
 
 const Routes = createAppContainer(
   createStackNavigator(
     {
+      LoadingPage: { screen: LoadingPage },
       Login: { screen: Login },
       Mapa: { screen: Mapa }
     },
