@@ -5,7 +5,7 @@
 ````bash
 $ yarn `or` npm i
 ````
-then with your emulator open
+#### then with your emulator open
 
 ````bash
 $ react-native run-android `or` react-native run-ios
